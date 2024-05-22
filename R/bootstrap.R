@@ -1,15 +1,15 @@
-#' Creates a Boostrap Distribution for a given statistic on a given empiracal distirbution
+#' Creates a Bootstrap Distribution for a given statistic on a given empirical distirbution
 #'
-#' @param emp_dist Empirical Distribution to boostrap
-#' @param B Number of boostrap interations to perform
-#' @param stat Statistic to create bootsrap distribution for
+#' @param emp_dist Empirical Distribution to bootstrap
+#' @param B Number of bootstrap iterations to perform
+#' @param stat Statistic to create boottsrap distribution for
 #' @param quantile Quantile to calculate between 0 and 1 if stat = quantile
 #'
 #' @return A vector containing the boostr
 #'
 #' @export
 
-bootstrap <- function(emp_dist, B = 5000, stat, quantile=NULL) {
+bootstrap <- function(emp_dist, B = 5000, stat, quantile = NULL) {
 
   stopifnot(
     is.numeric(emp_dist),
@@ -34,27 +34,27 @@ bootstrap <- function(emp_dist, B = 5000, stat, quantile=NULL) {
 
 #' Calculates a specified statistic on a bootstrap sample
 #'
-#' @param boot_sample Empirical Distribution to bootstrap
+#' @param data Data to calcualte statistic on
 #' @param stat Statistic to calculate for bootstrap sample
 #' @param quantile Quantile to calculate between 0 and 1 if stat = quantile
 #'
 #' @return Specified statistic for bootstrap sample
 #'
-calc_theta <- function(boot_sample, stat, quantile = NULL) {
+calc_theta <- function(data, stat, quantile = NULL) {
   if (stat == "mean") {
-   return(mean(boot_sample))
+   return(mean(data))
   }
   if (stat == "median") {
-    return(median(boot_sample))
+    return(median(data))
   }
   if (stat == "quantile") {
-    return(quantile(boot_sample, quantile))
+    return(quantile(data, quantile))
   }
   if (stat == "sd") {
-    return(sd(boot_sample))
+    return(sd(data))
   }
   if (stat == "iqr") {
-    return(quantile(boot_sample, .75) - quantile(boot_sample, .25))
+    return(quantile(data, .75) - quantile(data, .25))
   }
 }
 
