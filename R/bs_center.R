@@ -37,7 +37,6 @@ bs_center <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) {
   list(mean = mean, sd = sd, percentile_ci = percentile_ci, pivotal_ci = pivotal_ci)
 }
 
-
 #' Computes the pivotal interval for a location based statistic measuring
 #'
 #' @param emp_dist Empirical distribution to bootstrap

@@ -1,3 +1,8 @@
+#' Creates a Bootstrap Distribution for a given statistic on a given empirical distribution
+#'
+#' @param emp_dist Empirical Distribution to bootstrap
+#' @param B Number of bootstrap iterations to perform
+#' @param stat Statistic to create bootstrap distribution for
 #' Creates a Bootstrap Distribution for a given statistic on a given empirical distirbution
 #'
 #' @param emp_dist Empirical Distribution to bootstrap
@@ -5,7 +10,7 @@
 #' @param stat Statistic to create boottsrap distribution for
 #' @param quantile Quantile to calculate between 0 and 1 if stat = quantile
 #'
-#' @return A vector containing the boostr
+#' @return A vector containing the bootstrap
 #'
 #' @export
 
@@ -39,7 +44,7 @@ bootstrap <- function(emp_dist, B = 5000, stat, quantile = NULL) {
 #' @param quantile Quantile to calculate between 0 and 1 if stat = quantile
 #'
 #' @return Specified statistic for bootstrap sample
-#'
+
 calc_theta <- function(data, stat, quantile = NULL) {
   if (stat == "mean") {
    return(mean(data))
@@ -57,9 +62,3 @@ calc_theta <- function(data, stat, quantile = NULL) {
     return(quantile(data, .75) - quantile(data, .25))
   }
 }
-
-
-
-
-
-
