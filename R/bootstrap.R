@@ -2,7 +2,7 @@
 #'
 #' @param emp_dist Empirical Distribution to boostrap
 #' @param B Number of boostrap interations to perform
-#' @param stat Statistic to create bootsrap distribution for
+#' @param stat A string corresponding to statistic to create bootsrap distribution for
 #' @param quantile Quantile to calculate between 0 and 1 if stat = quantile
 #'
 #' @return A vector containing the boostr
