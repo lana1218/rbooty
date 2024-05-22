@@ -34,9 +34,8 @@ bs_center <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) {
   pivotal_ci = get_pivotal_ci_center(emp_dist, boot_dist, stat, quantile, alpha)
 
 
-  List(mean = mean, sd = sd, percentile_ci = percentile_ci, pivotal_ci = pivotal_ci)
+  list(mean = mean, sd = sd, percentile_ci = percentile_ci, pivotal_ci = pivotal_ci)
 }
-
 
 #' Computes the pivotal interval for a location based statistic measuring
 #'
