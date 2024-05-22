@@ -30,11 +30,11 @@ bs_center <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) {
   mean <- mean(boot_dist)
   sd <- sd(boot_dist)
 
-  percentile_ci = quantile(boot_dist, c(alpha/2, 1 - alpha/2))
+  percentile_ci = unname(quantile(boot_dist, c(alpha/2, 1 - alpha/2)))
   pivotal_ci = get_pivotal_ci_center(emp_dist, boot_dist, stat, quantile, alpha)
 
 
-  List(mean = mean, sd = sd, percentile_ci = percentile_ci, pivotal_ci = pivotal_ci)
+  list(mean = mean, sd = sd, percentile_ci = percentile_ci, pivotal_ci = pivotal_ci)
 }
 
 
@@ -51,9 +51,13 @@ bs_center <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) {
 get_pivotal_ci_center <- function(emp_dist, boot_dist, stat, quantile, alpha) {
 
   theta_actual <- calc_theta(emp_dist, stat, quantile)
-  U <- quantile(boot_dist, 1 - alpha/2)
-  L <- quantile(boot_dist, alpha/2)
+  U <- unname(quantile(boot_dist, 1 - alpha/2))
+  L <- unname(quantile(boot_dist, alpha/2))
 
   c(2*theta_actual - U, 2*theta_actual - L)
 
 }
+
+df <- read.csv(here::here("tests", "data", "tips.csv"))
+bs_center(df$TipPercent, stat = "mean", alpha = .05)
+
