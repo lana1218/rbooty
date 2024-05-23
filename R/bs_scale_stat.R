@@ -7,7 +7,7 @@
 #'
 #' @export
 
-bs_scale <- function(emp_dist, B = 5000, stat, alpha = .05) {
+bs_scale_stat <- function(emp_dist, B = 5000, stat, alpha = .05) {
 
   if (!(stat %in% c("sd", "iqr"))) {
     return("Please enter valid scale statistic\n
