@@ -9,7 +9,6 @@
 #'
 #' @export
 #'
-
 bs_plot <- function(boot_dist, stat){
   ggplot(df, aes(x = values)) +
     geom_histogram(fill = "lightblue",
