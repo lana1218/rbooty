@@ -2,7 +2,7 @@
 #'
 #' @param emp_dist Empirical distribution to bootstrap
 #' @param B Number of bootstrap iterations to perform
-#' @param stat Measure of center to use as statistic: mean, median, or quantile
+#' @param stat Location-based statistic to use. Options: mean, median, or quantile
 #' @param quantile Quantile to calculate between 0 and 1 if stat = quantile
 #' @param alpha Alpha level for CI's. Default alpha = 0.05 for 95% conf. Conf = (1 - alpha)*100%
 #'
@@ -22,7 +22,7 @@ bs_loc_stat <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) 
     return("Please enter valid alpha level between (0, 1)")
   }
 
-  # create bootsrap distribution for statistic
+  # create bootstrap distribution for statistic
   boot_dist <- bootstrap(emp_dist, B, stat, quantile)
 
   # return message if invalid quantile was specified
