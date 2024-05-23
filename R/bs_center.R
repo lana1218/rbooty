@@ -16,16 +16,15 @@ bs_center <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) {
             values = mean, median, quantile")
   }
 
-  if (stat == "quantile" & !is.numeric(quantile)) {
-    return("Please enter valid quantile between (0, 1)")
-  }
-
   if (alpha >= 1 | alpha <= 0 | !is.numeric(alpha)) {
     return("Please enter valid alpha level between (0, 1)")
   }
 
   boot_dist <- bootstrap(emp_dist, B, stat, quantile)
 
+  if (!is.numeric(boot_dist)) {
+    return(boot_dist)
+  }
 
   mean <- mean(boot_dist)
   sd <- sd(boot_dist)
