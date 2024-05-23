@@ -46,6 +46,10 @@ bootstrap <- function(emp_dist, B = 5000, stat, quantile = NULL) {
 #'
 calc_theta <- function(data, stat, quantile = NULL) {
 
+  stopifnot(
+    is.numeric(data) # only calculate statistics on quantitative responses
+  )
+
   if (stat == "mean") {
    return(mean(data))
   }
