@@ -41,7 +41,7 @@ bs_loc_stat <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) 
   pivotal_ci = get_pivotal_ci_loc(emp_dist, boot_dist, stat, quantile, alpha)
 
   # return elements in a list
-  list(mean = mean, sd = sd, percentile_ci = percentile_ci, pivotal_ci = pivotal_ci)
+  list(mean = mean, s_boot = s_boot, percentile_ci = percentile_ci, pivotal_ci = pivotal_ci)
 }
 
 
@@ -67,5 +67,5 @@ get_pivotal_ci_loc <- function(emp_dist, boot_dist, stat, quantile, alpha = .05)
 }
 
 df <- read.csv(here::here("tests", "data", "tips.csv"))
-bs_center(df$TipPercent, stat = "mean", alpha = .05)
+bs_loc_stat(df$TipPercent, stat = "mean", alpha = .05)
 
