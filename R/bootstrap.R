@@ -69,3 +69,7 @@ calc_theta <- function(data, stat, quantile = NULL) {
     return("Please specify valid stat. Options: mean, median, sd, iqr, quantile")
   }
 }
+
+
+df <- read.csv(here::here("tests", "data", "tips.csv"))
+bootstrap(df$TipPercent, stat = "mean")
