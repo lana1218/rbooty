@@ -1,51 +1,64 @@
-#' Computes estimated mean, sd, and confidence intervals based on given the
-#' bootstrap distribution for given scale-based statistics
+#' Computes estimated bootstrap mean, bootstrap sd, percentile interval, and pivotal interval for a scale-based statistic (sd, iqr)
 #'
-#' @param boot_dist Bootstrap Distribution
+#' @param emp_dist Empirical distribution to bootstrap
+#' @param B Number of bootstrap iterations to perform
+#' @param stat Scale-based statistic to use. Options: sd, iqr
+#' @param alpha Alpha level for CI's. Default alpha = 0.05 for 95% conf. Conf = (1 - alpha)*100%
 #'
-#' @return A vector containing the boostrap mean, sd, and CI
+#' @return A list containing the boostrap mean, bootsrap sd, percentile interval, and pivotal interval
 #'
 #' @export
-
 bs_scale_stat <- function(emp_dist, B = 5000, stat, alpha = .05) {
 
+  # check for valid scale-based statistic
   if (!(stat %in% c("sd", "iqr"))) {
     return("Please enter valid scale statistic\n
             values = sd, iqr")
   }
 
+  # check for valid alpha level
   if (alpha >= 1 | alpha <= 0 | !is.numeric(alpha)) {
     return("Please enter valid alpha level between (0, 1)")
   }
 
+  # create bootstrap distribution for statistic
   boot_dist <- bootstrap(emp_dist, B, stat)
 
 
+  # calculate mean and sd of bootstrap distribution
   mean <- mean(boot_dist)
-  sd <- sd(boot_dist)
+  s_boot <- sd(boot_dist)
 
-  percentile_ci = quantile(boot_dist, c(alpha/2, 1 - alpha/2))
+  # calculate percentile interval for bootstrap distribution
+  percentile_ci = unname(quantile(boot_dist, c(alpha/2, 1 - alpha/2)))
+
+  # calculate pivotal interval for bootstrap distribution
   pivotal_ci = get_pivotal_ci_scale(emp_dist, boot_dist, stat, alpha)
 
-
-  list(mean = mean, sd = sd, percentile_ci = percentile_ci, pivotal_ci = pivotal_ci)
+  # return elements in a list
+  list(mean = mean, s_boot = s_boot, percentile_ci = percentile_ci, pivotal_ci = pivotal_ci)
 }
 
-#' Computes the pivotal interval for a scale-based statistic measuring
+
+#' Computes the pivotal interval for a scale-based statistic
 #'
 #' @param emp_dist Empirical distribution to bootstrap
-#' @param boot_dist Bootstrap distribution for estimated statistic
-#' @param stat Measure of scale to use as statistic: sd, iqr
-#' @param alpha Alpha level for CI's: Conf = (1 - alpha)
+#' @param boot_dist Bootstrap distribution for statistic
+#' @param stat Measure of variability to use as statistic. Options: sd, iqr
+#' @param alpha Alpha level for CI's. Default alpha = 0.05 for 95% conf. Conf = (1 - alpha)*100%
 #'
 #' @return Returns the pivotal CI for specified statistic
 #'
 get_pivotal_ci_scale <- function(emp_dist, boot_dist, stat, alpha) {
 
   theta_actual <- calc_theta(emp_dist, stat)
-  U <- quantile(boot_dist, 1 - alpha/2)
-  L <- quantile(boot_dist, alpha/2)
+  U <- unname(quantile(boot_dist, 1 - alpha/2))
+  L <- unname(quantile(boot_dist, alpha/2))
 
   c(theta_actual^2/U, theta_actual^2/L)
 
 }
+
+df <- read.csv(here::here("tests", "data", "tips.csv"))
+bs_scale_stat(df$TipPercent, stat = "sd", alpha = .05)
+
