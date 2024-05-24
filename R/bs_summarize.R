@@ -11,8 +11,6 @@
 #' @importFrom gridExtra tableGrob
 #'
 #' @export
-#'
-
 bs_summarize <- function(emp_dist,
                          B = 5000,
                          stat,
@@ -46,7 +44,7 @@ bs_summarize <- function(emp_dist,
 
   boot_table <- tableGrob(my_df)
 
-  boot_plot <- bs_plot(boot_dist, stat)
+  boot_plot <- bs_plot(boot_list, stat)
 
   grid.arrange(boot_plot, boot_table)
 

@@ -10,6 +10,8 @@
 #' @export
 #'
 bs_plot <- function(boot_dist, stat){
+  df <- data.frame(values = boot_dist)
+
   ggplot(df, aes(x = values)) +
     geom_histogram(fill = "lightblue",
                    color = "black",

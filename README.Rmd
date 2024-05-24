@@ -34,7 +34,30 @@ library(rbooty)
 ```
 
 
-## insults
+## Summarizing the bootsrap distribution
 
+* `bs_summarize()` allows you to output the summary statistics and resulting bootstrap distribution in one output, given a desired statistic (mean, median, quantile, sd, iqr)
 
-beep boop
+```{r}
+library(rbooty)
+
+test <- bootstrap(tips$TipPercent, stat = "mean")
+
+bs_summarize(tips$TipPercent, stat = "mean")
+```
+
+## Other Use Cases
+You can calculate the statistics for the bootstrap distribution independently.
+
+```{r}
+bs_loc_stat(tips, stat = "med")
+
+bs_scale_stat(tips, stat = "sd")
+```
+
+You can also get a dataframe of the bootstrap distribution. 
+
+```{r}
+
+```
+
