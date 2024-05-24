@@ -34,7 +34,7 @@ library(rbooty)
 ```
 
 
-## Summarizing the bootsrap distribution
+## Summarizing the bootstrap distribution
 
 * `bs_summarize()` allows you to output the summary statistics and resulting bootstrap distribution in one output, given a desired statistic (mean, median, quantile, sd, iqr)
 
