@@ -5,11 +5,13 @@
 #'
 #' @return A plot of the boostrap distribution
 #'
-#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 ggplot aes geom_histogram labs theme_classic
 #'
 #' @export
 #'
 bs_plot <- function(boot_dist, stat){
+  df <- data.frame(values = boot_dist)
+
   ggplot(df, aes(x = values)) +
     geom_histogram(fill = "lightblue",
                    color = "black",

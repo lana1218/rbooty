@@ -8,11 +8,9 @@
 #'
 #' @return A table and plot
 #'
-#' @importFrom gridExtra tableGrob
+#' @importFrom gridExtra tableGrob grid.arrange
 #'
 #' @export
-#'
-
 bs_summarize <- function(emp_dist,
                          B = 5000,
                          stat,
@@ -44,10 +42,12 @@ bs_summarize <- function(emp_dist,
     `Upper Pivotal CI` = round(boot_list$pivotal_ci[2], 3)
   )
 
-  boot_table <- tableGrob(my_df)
+  boot_table <- tableGrob(boot_df)
 
-  boot_plot <- bs_plot(boot_dist, stat)
+  boot_plot <- bs_plot(boot_list$boot_dist, stat)
 
-  grid.arrange(boot_plot, boot_table)
+  grid.arrange(
+    boot_plot, boot_table,
+    widths = c(2, 1))
 
 }
