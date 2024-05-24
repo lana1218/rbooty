@@ -1,4 +1,4 @@
-#' Puts output of bs_center, bs_scale, and bs_plot outputs into a table
+#' Prints summary statistics and plot of bootstrap distribution
 #'
 #' @param emp_dist Empirical distribution to bootstrap
 #' @param B Number of bootstrap iterations to perform
@@ -7,6 +7,8 @@
 #' @param alpha Alpha level for CI's: Conf = (1 - alpha)
 #'
 #' @return A table and plot
+#'
+#' @importFrom gridExtra tableGrob
 #'
 #' @export
 #'
@@ -25,15 +27,27 @@ bs_summarize <- function(emp_dist,
 
   # specific stats
   if (stat %in% c("mean", "median", "quantile")) {
-    boot_list <- bs_center(emp_dist, B, stat, quantile, alpha)
+    boot_list <- bs_loc_stat(emp_dist, B, stat, quantile, alpha)
   }
 
   else if (stat %in% c("sd", "iqr")){
-    boot_list <- boot_scale(emp_dist, B, stat, alpha)
+    boot_list <- bs_scale_stat(emp_dist, B, stat, alpha)
+
   }
 
+  boot_df <- data.frame(
+    mean = round(boot_list$mean, 3),
+    sd = round(boot_list$s_boot, 3),
+    `Lower Percentile CI` = round(boot_list$percentile_ci[1], 3),
+    `Upper Percentile CI` = round(boot_list$percentile_ci[2], 3),
+    `Lower Pivotal CI` = round(boot_list$pivotal_ci[1], 3),
+    `Upper Pivotal CI` = round(boot_list$pivotal_ci[2], 3)
+  )
 
+  boot_table <- tableGrob(my_df)
 
+  boot_plot <- bs_plot(boot_dist, stat)
 
+  grid.arrange(boot_plot, boot_table)
 
 }
