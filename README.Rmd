@@ -38,7 +38,7 @@ library(rbooty)
 
 * `bs_summarize()` allows you to output the summary statistics and resulting bootstrap distribution in one output, given a desired statistic (mean, median, quantile, sd, iqr)
 
-```{r}
+```{r, message = FALSE}
 library(rbooty)
 
 bs_summarize(tips$TipPercent, stat = "mean")

@@ -46,6 +46,8 @@ bs_summarize <- function(emp_dist,
 
   boot_plot <- bs_plot(boot_list$boot_dist, stat)
 
-  grid.arrange(boot_plot, boot_table)
+  grid.arrange(
+    boot_plot, boot_table,
+    widths = c(2, 1))
 
 }

@@ -32,7 +32,6 @@ library(rbooty)
 library(rbooty)
 
 bs_summarize(tips$TipPercent, stat = "mean")
-#> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
@@ -47,19 +46,19 @@ median_stat <- bs_loc_stat(tips$TipPercent, stat = "median")
 str(median_stat)
 #> List of 5
 #>  $ mean         : num 17.2
-#>  $ s_boot       : num 0.904
+#>  $ s_boot       : num 0.908
 #>  $ percentile_ci: num [1:2] 15.9 18.9
 #>  $ pivotal_ci   : num [1:2] 14.8 17.8
-#>  $ boot_dist    : num [1:5000] 17.5 16.1 16.9 16.9 17.4 ...
+#>  $ boot_dist    : num [1:5000] 18.1 17.2 16.6 16.6 18.2 ...
 
 sd_stat <- bs_scale_stat(tips$TipPercent, stat = "sd")
 str(sd_stat)
 #> List of 5
 #>  $ mean         : num 5.49
-#>  $ s_boot       : num 1.42
-#>  $ percentile_ci: num [1:2] 2.84 8.14
-#>  $ pivotal_ci   : num [1:2] 4.09 11.71
-#>  $ boot_dist    : num [1:5000] 7.92 6.14 4.86 7.01 3.3 ...
+#>  $ s_boot       : num 1.43
+#>  $ percentile_ci: num [1:2] 2.83 8.18
+#>  $ pivotal_ci   : num [1:2] 4.06 11.75
+#>  $ boot_dist    : num [1:5000] 4.62 6.85 3.82 5.74 6.25 ...
 ```
 
 You can also get a dataframe of the bootstrap distribution.
@@ -68,5 +67,5 @@ You can also get a dataframe of the bootstrap distribution.
 boot_dist <- bootstrap(tips$TipPercent, stat = "mean")
 
 head(boot_dist)
-#> [1] 18.60333 19.78667 19.92000 18.25000 17.40667 19.45333
+#> [1] 19.05667 18.60667 16.67667 20.82333 18.60667 19.31333
 ```
