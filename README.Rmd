@@ -41,23 +41,25 @@ library(rbooty)
 ```{r}
 library(rbooty)
 
-test <- bootstrap(tips$TipPercent, stat = "mean")
-
 bs_summarize(tips$TipPercent, stat = "mean")
 ```
 
 ## Other Use Cases
 You can calculate the statistics for the bootstrap distribution independently.
 
-```{r}
-bs_loc_stat(tips, stat = "med")
+```{r,}
+median_stat <- bs_loc_stat(tips$TipPercent, stat = "median")
+str(median_stat)
 
-bs_scale_stat(tips, stat = "sd")
+sd_stat <- bs_scale_stat(tips$TipPercent, stat = "sd")
+str(sd_stat)
 ```
 
 You can also get a dataframe of the bootstrap distribution. 
 
 ```{r}
+boot_dist <- bootstrap(tips$TipPercent, stat = "mean")
 
+head(boot_dist)
 ```
 

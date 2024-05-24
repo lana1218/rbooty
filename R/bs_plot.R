@@ -5,7 +5,7 @@
 #'
 #' @return A plot of the boostrap distribution
 #'
-#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 ggplot aes geom_histogram labs theme_classic
 #'
 #' @export
 #'
