@@ -9,6 +9,7 @@
 #' @return A list containing the boostrap mean, bootsrap sd, percentile interval, and pivotal interval
 #'
 #' @export
+
 bs_center <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) {
 
   if (!(stat %in% c("mean", "median", "quantile"))) {
@@ -46,7 +47,7 @@ bs_center <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) {
 #' @param alpha Alpha level for CI's: Conf = (1 - alpha)
 #'
 #' @return Returns the pivotal CI for specified statistic
-#'
+
 get_pivotal_ci_center <- function(emp_dist, boot_dist, stat, quantile, alpha) {
 
   theta_actual <- calc_theta(emp_dist, stat, quantile)

@@ -39,7 +39,7 @@ bs_scale <- function(emp_dist, B = 5000, stat, alpha = .05) {
 #' @param alpha Alpha level for CI's: Conf = (1 - alpha)
 #'
 #' @return Returns the pivotal CI for specified statistic
-#'
+
 get_pivotal_ci_scale <- function(emp_dist, boot_dist, stat, alpha) {
 
   theta_actual <- calc_theta(emp_dist, stat)
