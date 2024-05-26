@@ -1,12 +1,12 @@
-#' Prints summary statistics and plot of bootstrap distribution
+#' Creates an overall summary for a bootstrap statistic. Reports descriptive statistics and plots bootstrap distribution
 #'
-#' @param emp_dist Empirical distribution to bootstrap
+#' @param emp_dist Empirical distribution to bootstrap from
 #' @param B Number of bootstrap iterations to perform
 #' @param stat Measure of center to use as statistic: mean, median, or quantile
 #' @param quantile Quantile to calculate between 0 and 1 if stat = quantile
 #' @param alpha Alpha level for CI's: Conf = (1 - alpha)
 #'
-#' @return A table and plot
+#' @return Plotted bootstrap distribution and table of summary statistics
 #'
 #' @importFrom gridExtra tableGrob grid.arrange
 #'
