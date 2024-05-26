@@ -45,7 +45,8 @@ bs_summarize(tips$TipPercent, stat = "mean")
 ```
 
 ## Other Use Cases
-You can calculate the statistics for the bootstrap distribution independently.
+
+You can calculate the statistics for the bootstrap distribution independently. bs_loc_stat can be used to bootstrap a location-based statistic such as the mean, median, or any quantile. bs_scale_stat can be used to to bootstrap a scale-based statistic such as the sd or iqr. 
 
 ```{r,}
 median_stat <- bs_loc_stat(tips$TipPercent, stat = "median")
