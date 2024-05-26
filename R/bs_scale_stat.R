@@ -12,8 +12,7 @@ bs_scale_stat <- function(emp_dist, B = 5000, stat, alpha = .05) {
 
   # check for valid scale-based statistic
   if (!(stat %in% c("sd", "iqr"))) {
-    return("Please enter valid scale statistic\n
-            values = sd, iqr")
+    return("Please enter valid scale statistic\nvalues = sd, iqr")
   }
 
   # check for valid alpha level

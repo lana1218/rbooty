@@ -46,19 +46,19 @@ median_stat <- bs_loc_stat(tips$TipPercent, stat = "median")
 str(median_stat)
 #> List of 5
 #>  $ mean         : num 17.2
-#>  $ s_boot       : num 0.915
+#>  $ s_boot       : num 0.908
 #>  $ percentile_ci: num [1:2] 16 19
 #>  $ pivotal_ci   : num [1:2] 14.8 17.8
-#>  $ boot_dist    : num [1:5000] 16.2 18.1 18.5 16.9 16.4 ...
+#>  $ boot_dist    : num [1:5000] 17.6 18.2 18.9 16.2 16.9 ...
 
 sd_stat <- bs_scale_stat(tips$TipPercent, stat = "sd")
 str(sd_stat)
 #> List of 5
 #>  $ mean         : num 5.48
-#>  $ s_boot       : num 1.42
-#>  $ percentile_ci: num [1:2] 2.85 8.16
-#>  $ pivotal_ci   : num [1:2] 4.07 11.67
-#>  $ boot_dist    : num [1:5000] 6.87 8.94 3.51 8.39 5.8 ...
+#>  $ s_boot       : num 1.43
+#>  $ percentile_ci: num [1:2] 2.83 8.14
+#>  $ pivotal_ci   : num [1:2] 4.09 11.76
+#>  $ boot_dist    : num [1:5000] 5.71 6.86 6.05 5.77 4.5 ...
 ```
 
 You can also get a dataframe of the bootstrap distribution.
@@ -67,7 +67,7 @@ You can also get a dataframe of the bootstrap distribution.
 boot_dist <- bootstrap(tips$TipPercent, stat = "mean")
 
 head(boot_dist)
-#> [1] 18.99333 17.39667 19.33333 19.98667 19.06000 18.80667
+#> [1] 18.01667 18.68333 19.35000 17.54000 17.67667 20.11333
 ```
 
 You can use bs_plot to plot a bootstrap distribution.

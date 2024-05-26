@@ -13,8 +13,7 @@ bs_loc_stat <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) 
 
   # check for valid location-based statistic
   if (!(stat %in% c("mean", "median", "quantile"))) {
-    return("Please enter valid center of measure statistic\n
-            values = mean, median, quantile")
+    return("Please enter valid center of measure statistic\nvalues = mean, median, quantile")
   }
 
   # check for valid alpha level

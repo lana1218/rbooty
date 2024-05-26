@@ -1,13 +1,3 @@
-#' Creates a Bootstrap Distribution for a given statistic on a given empirical distribution
-#'
-#' @param emp_dist Empirical Distribution to bootstrap
-#' @param B Number of bootstrap iterations to perform
-#' @param stat Statistic to create bootstrap distribution for
-#' Creates a Bootstrap Distribution for a given statistic on a given empirical distirbution
-#'
-#' @param emp_dist Empirical Distribution to bootstrap
-#' @param B Number of bootstrap iterations to perform
-#' @param stat Statistic to create boottsrap distribution for
 #' Creates a Bootstrap Distribution for a given statistic using an given empirical distribution
 #'
 #' @param emp_dist Empirical Distribution to bootstrap from
@@ -27,12 +17,16 @@ bootstrap <- function(emp_dist, B = 5000, stat, quantile = NULL) {
 
   # check for valid stat parameter
   if (!(stat %in% c("mean", "median", "sd", 'iqr', "quantile"))) {
-    return("Please enter valid statistic\n
-           values = mean, median, sd, iqr, quantile")
+    return("Please enter valid statistic\nvalues = mean, median, sd, iqr, quantile")
   }
   # check for valid quantile parameter if stat specified is a quantile
   if (stat == "quantile" & !is.numeric(quantile)) {
     return("Please enter valid quantile between (0, 1)")
+  }
+  if (stat == "quantile" & is.numeric(quantile)) {
+    if(quantile <= 0 | quantile >= 1) {
+      return("Please enter valid quantile between (0, 1)")
+    }
   }
 
   # initialize vector of size B for bootstrap distribution
@@ -67,13 +61,13 @@ calc_theta <- function(data, stat, quantile = NULL) {
     return(median(data))
   }
   if (stat == "quantile") {
-    return(quantile(data, quantile))
+    return(unname(quantile(data, quantile)))
   }
   if (stat == "sd") {
     return(sd(data))
   }
   if (stat == "iqr") {
-    return(quantile(data, .75) - quantile(data, .25))
+    return(unname(quantile(data, .75)) - unname(quantile(data, .25)))
   }
   else {
     return("Please specify valid stat. Options: mean, median, sd, iqr, quantile")
