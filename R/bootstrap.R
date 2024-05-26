@@ -1,3 +1,13 @@
+#' Creates a Bootstrap Distribution for a given statistic on a given empirical distribution
+#'
+#' @param emp_dist Empirical Distribution to bootstrap
+#' @param B Number of bootstrap iterations to perform
+#' @param stat Statistic to create bootstrap distribution for
+#' Creates a Bootstrap Distribution for a given statistic on a given empirical distirbution
+#'
+#' @param emp_dist Empirical Distribution to bootstrap
+#' @param B Number of bootstrap iterations to perform
+#' @param stat Statistic to create boottsrap distribution for
 #' Creates a Bootstrap Distribution for a given statistic using an given empirical distribution
 #'
 #' @param emp_dist Empirical Distribution to bootstrap from
@@ -43,7 +53,7 @@ bootstrap <- function(emp_dist, B = 5000, stat, quantile = NULL) {
 #' @param quantile Quantile to calculate between 0 and 1 if stat = quantile
 #'
 #' @return Value for the calculated statistic on the data
-#'
+
 calc_theta <- function(data, stat, quantile = NULL) {
 
   stopifnot(
