@@ -1,0 +1,65 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# rbooty
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+rbooty provides comprehensive functions for bootstrapping.
+
+## Installation
+
+You can install the the development version from [GitHub](https://github.com/) with:
+
+```{r, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("lana1218/rbooty")
+```
+
+```{r}
+library(rbooty)
+```
+
+
+## Summarizing the bootstrap distribution
+
+* `bs_summarize()` allows you to output the summary statistics and resulting bootstrap distribution in one output, given a desired statistic (mean, median, quantile, sd, iqr)
+
+```{r, message = FALSE}
+library(rbooty)
+
+bs_summarize(tips$TipPercent, stat = "mean")
+```
+
+## Other Use Cases
+You can calculate the statistics for the bootstrap distribution independently.
+
+```{r,}
+median_stat <- bs_loc_stat(tips$TipPercent, stat = "median")
+str(median_stat)
+
+sd_stat <- bs_scale_stat(tips$TipPercent, stat = "sd")
+str(sd_stat)
+```
+
+You can also get a dataframe of the bootstrap distribution. 
+
+```{r}
+boot_dist <- bootstrap(tips$TipPercent, stat = "mean")
+
+head(boot_dist)
+```
+
