@@ -63,3 +63,9 @@ boot_dist <- bootstrap(tips$TipPercent, stat = "mean")
 head(boot_dist)
 ```
 
+You can use bs_plot to plot a bootstrap distribution.
+
+```{r}
+bs_plot(boot_dist = boot_dist, stat = "mean")
+```
+

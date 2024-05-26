@@ -33,13 +33,24 @@ bs_summarize <- function(emp_dist,
 
   }
 
+  conf <- paste((1 - alpha)*100, "%", sep = "")
   boot_df <- data.frame(
-    mean = round(boot_list$mean, 3),
-    sd = round(boot_list$s_boot, 3),
-    `Lower Percentile CI` = round(boot_list$percentile_ci[1], 3),
-    `Upper Percentile CI` = round(boot_list$percentile_ci[2], 3),
-    `Lower Pivotal CI` = round(boot_list$pivotal_ci[1], 3),
-    `Upper Pivotal CI` = round(boot_list$pivotal_ci[2], 3)
+    stat = c(
+      "mean",
+      "s_boot",
+      paste(conf, "_ci_percentile_lower", sep = ""),
+      paste(conf, "_ci_percentile_upper", sep = ""),
+      paste(conf, "_ci_pivotal_lower", sep = ""),
+      paste(conf, "_ci_pivotal_upper", sep = "")
+    ),
+    value = c(
+      round(boot_list$mean, 3),
+      round(boot_list$s_boot, 3),
+      round(boot_list$percentile_ci[1], 3),
+      round(boot_list$percentile_ci[2], 3),
+      round(boot_list$pivotal_ci[1], 3),
+      round(boot_list$pivotal_ci[2], 3)
+    )
   )
 
   boot_table <- tableGrob(boot_df)
@@ -48,6 +59,6 @@ bs_summarize <- function(emp_dist,
 
   grid.arrange(
     boot_plot, boot_table,
-    widths = c(2, 1))
+    nrow = 2, ncol = 1)
 
 }
