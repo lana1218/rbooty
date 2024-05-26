@@ -1,11 +1,11 @@
-#' Creates a Bootstrap Distribution for a given statistic using an given empirical distribution
+#' Creates a bootstrap distribution for a given statistic for a given empirical distribution
 #'
 #' @param emp_dist Empirical Distribution to bootstrap from
 #' @param B Number of bootstrap iterations to perform. Default = 5000
 #' @param stat Statistic to create bootstrap distribution for. Options: mean, median, sd, iqr, quantile
 #' @param quantile Quantile to calculate between 0 and 1 if stat = quantile
 #'
-#' @return A vector of size B containing bootstrap distribution for given statistic
+#' @return A vector of size B containing bootstrap distribution of given statistic
 #'
 #' @export
 bootstrap <- function(emp_dist, B = 5000, stat, quantile = NULL) {
@@ -33,21 +33,21 @@ bootstrap <- function(emp_dist, B = 5000, stat, quantile = NULL) {
   theta_star <- as.numeric(B)
   # iterate B number of times
   for (i in 1:B) {
-    boot_sample <- sample(emp_dist, replace = TRUE) # sample with replacement from empiracal distribution
+    boot_sample <- sample(emp_dist, replace = TRUE) # sample with replacement from empirical distribution
     theta_star[i] <- calc_theta(boot_sample, stat, quantile) # calculate statistic for each bootstrap sample
   }
   theta_star # return final bootstrap distribution
 }
 
 
-#' Calculates a specified statistic on a bootstrap sample
+#' Calculates a specified statistic on a given dataset
 #'
 #' @param data Data to calculate statistic on
 #' @param stat Statistic to calculate on the data. Options: mean, median, sd, iqr, quantile
 #' @param quantile Quantile to calculate between 0 and 1 if stat = quantile
 #'
 #' @return Value for the calculated statistic on the data
-
+#'
 calc_theta <- function(data, stat, quantile = NULL) {
 
   stopifnot(
