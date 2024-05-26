@@ -20,7 +20,7 @@ test_that("calc_theta works for medians", {
 
 test_that("calc_theta works for quantiles", {
 
-  correct_result <- c(`25%` = 2)
+  correct_result <- c(2)
 
   my_result <- calc_theta(c(1, 2, 3, 4, 5), "quantile", 0.25)
 
@@ -60,7 +60,7 @@ test_that("bootstrap works", {
 
 test_that("bootstrap works for invalid statistic error", {
 
-  correct_result <- "Please enter valid statistic: values = mean, median, sd, iqr, quantile"
+  correct_result <- "Please enter valid statistic\nvalues = mean, median, sd, iqr, quantile"
 
   my_result <- bootstrap(emp_dist = c(1, 2, 3, 4, 5), stat = "mode")
 

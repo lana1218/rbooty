@@ -1,20 +1,19 @@
 #' Computes estimated bootstrap mean, bootstrap sd, percentile interval, and pivotal interval for a location-based statistic (mean, median, quantile)
 #'
-#' @param emp_dist Empirical distribution to bootstrap
+#' @param emp_dist Empirical distribution to bootstrap from
 #' @param B Number of bootstrap iterations to perform
 #' @param stat Location-based statistic to use. Options: mean, median, or quantile
 #' @param quantile Quantile to calculate between 0 and 1 if stat = quantile
 #' @param alpha Alpha level for CI's. Default alpha = 0.05 for 95% conf. Conf = (1 - alpha)*100%
 #'
-#' @return A list containing the boostrap mean, bootsrap sd, percentile interval, and pivotal interval
+#' @return A list containing the bootstrap mean, bootstrap sd, percentile interval, and pivotal interval of the specified statistic
 #'
 #' @export
 bs_loc_stat <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) {
 
   # check for valid location-based statistic
   if (!(stat %in% c("mean", "median", "quantile"))) {
-    return("Please enter valid center of measure statistic\n
-            values = mean, median, quantile")
+    return("Please enter valid center of measure statistic\nvalues = mean, median, quantile")
   }
 
   # check for valid alpha level
@@ -69,7 +68,4 @@ get_pivotal_ci_loc <- function(emp_dist, boot_dist, stat, quantile, alpha = .05)
   c(2*theta_actual - U, 2*theta_actual - L) # return lower and up limits of CI
 
 }
-
-df <- read.csv(here::here("tests", "data", "tips.csv"))
-bs_loc_stat(df$TipPercent, stat = "mean", alpha = .05)
 

@@ -1,14 +1,13 @@
-#' Plots the bootstrap distribution
+#' Plots a given bootstrap distribution
 #'
 #' @param boot_dist Bootstrap Distribution
-#' @param stat A string corresponding to the statistic of boostrap distribution
+#' @param stat A string corresponding to the statistic of bootstrap distribution
 #'
-#' @return A plot of the boostrap distribution
+#' @return A plot of the bootstrap distribution
 #'
 #' @importFrom ggplot2 ggplot aes geom_histogram labs theme_classic
 #'
 #' @export
-#'
 bs_plot <- function(boot_dist, stat){
   df <- data.frame(values = boot_dist)
 

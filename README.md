@@ -22,7 +22,7 @@ devtools::install_github("lana1218/rbooty")
 library(rbooty)
 ```
 
-## Summarizing the bootsrap distribution
+## Summarizing the bootstrap distribution
 
 - `bs_summarize()` allows you to output the summary statistics and
   resulting bootstrap distribution in one output, given a desired
@@ -47,18 +47,18 @@ str(median_stat)
 #> List of 5
 #>  $ mean         : num 17.2
 #>  $ s_boot       : num 0.908
-#>  $ percentile_ci: num [1:2] 15.9 18.9
+#>  $ percentile_ci: num [1:2] 16 19
 #>  $ pivotal_ci   : num [1:2] 14.8 17.8
-#>  $ boot_dist    : num [1:5000] 18.1 17.2 16.6 16.6 18.2 ...
+#>  $ boot_dist    : num [1:5000] 17.6 18.2 18.9 16.2 16.9 ...
 
 sd_stat <- bs_scale_stat(tips$TipPercent, stat = "sd")
 str(sd_stat)
 #> List of 5
-#>  $ mean         : num 5.49
+#>  $ mean         : num 5.48
 #>  $ s_boot       : num 1.43
-#>  $ percentile_ci: num [1:2] 2.83 8.18
-#>  $ pivotal_ci   : num [1:2] 4.06 11.75
-#>  $ boot_dist    : num [1:5000] 4.62 6.85 3.82 5.74 6.25 ...
+#>  $ percentile_ci: num [1:2] 2.83 8.14
+#>  $ pivotal_ci   : num [1:2] 4.09 11.76
+#>  $ boot_dist    : num [1:5000] 5.71 6.86 6.05 5.77 4.5 ...
 ```
 
 You can also get a dataframe of the bootstrap distribution.
@@ -67,5 +67,14 @@ You can also get a dataframe of the bootstrap distribution.
 boot_dist <- bootstrap(tips$TipPercent, stat = "mean")
 
 head(boot_dist)
-#> [1] 19.05667 18.60667 16.67667 20.82333 18.60667 19.31333
+#> [1] 18.01667 18.68333 19.35000 17.54000 17.67667 20.11333
 ```
+
+You can use bs_plot to plot a bootstrap distribution.
+
+``` r
+bs_plot(boot_dist = boot_dist, stat = "mean")
+#> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
