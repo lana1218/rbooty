@@ -22,10 +22,12 @@ bootstrap <- function(emp_dist, B = 5000, stat, quantile = NULL) {
   )
 
   if (!(stat %in% c("mean", "median", "sd", 'iqr', "quantile"))) {
-    return("Please enter valid statistic\n
-           values = mean, median, sd, iqr, quantile")
+    return("Please enter valid statistic: values = mean, median, sd, iqr, quantile")
   }
   if (stat == "quantile" & !is.numeric(quantile)) {
+    return("Please enter valid quantile between (0, 1)")
+  }
+  if (stat == "quantile" && (quantile > 1 | quantile < 0)) {
     return("Please enter valid quantile between (0, 1)")
   }
 
@@ -34,6 +36,7 @@ bootstrap <- function(emp_dist, B = 5000, stat, quantile = NULL) {
     boot_sample <- sample(emp_dist, replace = TRUE)
     theta_star[i] <- calc_theta(boot_sample, stat, quantile)
   }
+
   theta_star
 }
 
@@ -59,6 +62,8 @@ calc_theta <- function(data, stat, quantile = NULL) {
     return(sd(data))
   }
   if (stat == "iqr") {
-    return(quantile(data, .75) - quantile(data, .25))
+    iqr <- quantile(data, .75) - quantile(data, .25)
+    names(iqr) <- NULL
+    return(iqr)
   }
 }

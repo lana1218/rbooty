@@ -13,15 +13,17 @@
 bs_center <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) {
 
   if (!(stat %in% c("mean", "median", "quantile"))) {
-    return("Please enter valid center of measure statistic\n
-            values = mean, median, quantile")
+    return("Please enter valid center of measure statistic: values = mean, median, quantile")
   }
 
   if (stat == "quantile" & !is.numeric(quantile)) {
     return("Please enter valid quantile between (0, 1)")
   }
+  if (stat == "quantile" && (quantile > 1 | quantile < 0)) {
+    return("Please enter valid quantile between (0, 1)")
+  }
 
-  if (alpha >= 1 | alpha <= 0 | !is.numeric(alpha)) {
+  if (alpha >= 1 | alpha <= 0) {
     return("Please enter valid alpha level between (0, 1)")
   }
 
@@ -31,8 +33,8 @@ bs_center <- function(emp_dist, B = 5000, stat, quantile = NULL, alpha = .05) {
   mean <- mean(boot_dist)
   sd <- sd(boot_dist)
 
-  percentile_ci = quantile(boot_dist, c(alpha/2, 1 - alpha/2))
-  pivotal_ci = get_pivotal_ci_center(emp_dist, boot_dist, stat, quantile, alpha)
+  percentile_ci <- quantile(boot_dist, c(alpha/2, 1 - alpha/2))
+  pivotal_ci <- get_pivotal_ci_center(emp_dist, boot_dist, stat, quantile, alpha)
 
 
   list(mean = mean, sd = sd, percentile_ci = percentile_ci, pivotal_ci = pivotal_ci)
@@ -54,6 +56,8 @@ get_pivotal_ci_center <- function(emp_dist, boot_dist, stat, quantile, alpha) {
   U <- quantile(boot_dist, 1 - alpha/2)
   L <- quantile(boot_dist, alpha/2)
 
-  c(2*theta_actual - U, 2*theta_actual - L)
+  output <- c(2*theta_actual - U, 2*theta_actual - L)
+  names(output) <- c('2.5%', '97.5%')
 
+  output
 }
