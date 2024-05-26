@@ -1,11 +1,11 @@
 #' Computes estimated bootstrap mean, bootstrap sd, percentile interval, and pivotal interval for a scale-based statistic (sd, iqr)
 #'
-#' @param emp_dist Empirical distribution to bootstrap
+#' @param emp_dist Empirical distribution to bootstrap from
 #' @param B Number of bootstrap iterations to perform
 #' @param stat Scale-based statistic to use. Options: sd, iqr
 #' @param alpha Alpha level for CI's. Default alpha = 0.05 for 95% conf. Conf = (1 - alpha)*100%
 #'
-#' @return A list containing the boostrap mean, bootsrap sd, percentile interval, and pivotal interval
+#' @return A list containing the boostrap mean, bootsrap sd, percentile interval, and pivotal interval of the specified statistic
 #'
 #' @export
 bs_scale_stat <- function(emp_dist, B = 5000, stat, alpha = .05) {
@@ -22,7 +22,6 @@ bs_scale_stat <- function(emp_dist, B = 5000, stat, alpha = .05) {
 
   # create bootstrap distribution for statistic
   boot_dist <- bootstrap(emp_dist, B, stat)
-
 
   # calculate mean and sd of bootstrap distribution
   mean <- mean(boot_dist)
@@ -61,7 +60,4 @@ get_pivotal_ci_scale <- function(emp_dist, boot_dist, stat, alpha) {
   c(theta_actual^2/U, theta_actual^2/L)
 
 }
-
-df <- read.csv(here::here("tests", "data", "tips.csv"))
-bs_scale_stat(df$TipPercent, stat = "sd", alpha = .05)
 
